@@ -128,7 +128,7 @@ for i in range(1,nMax):
 #-Plot infinity norms--------------------------------------
 #-                   --------------------------------------
 #----------------------------------------------------------
-f = plt.figure(figsize=(16,9))
+f = plt.figure(figsize=(11.69,8.27))
 # Density
 plt.subplot(221)
 plt.plot(Nx, rhoInfnorm, '-ko')
@@ -192,7 +192,7 @@ f.savefig('gc_study_infE.pdf', bbox_inches='tight')
 #-Plot infinity orders-------------------------------------
 #-                    -------------------------------------
 #----------------------------------------------------------
-g = plt.figure(figsize=(16,9))
+g = plt.figure(figsize=(11.69,8.27))
 # Density
 plt.subplot(221)
 plt.plot(Nx[1:nMax], rhoInfq, '-ko')
@@ -251,7 +251,7 @@ g.savefig('gc_study_infq.pdf', bbox_inches='tight')
 #-Plot second norms----------------------------------------
 #-                 ----------------------------------------
 #----------------------------------------------------------
-h = plt.figure(figsize=(16,9))
+h = plt.figure(figsize=(11.69,8.27))
 # Density
 plt.subplot(221)
 plt.plot(Nx, rho2ndnorm, '-ko')
@@ -315,7 +315,7 @@ h.savefig('gc_study_2ndE.pdf', bbox_inches='tight')
 #-Plot second orders---------------------------------------
 #-                  ---------------------------------------
 #----------------------------------------------------------
-i = plt.figure(figsize=(16,9))
+i = plt.figure(figsize=(11.69,8.27))
 # Density
 plt.subplot(221)
 plt.plot(Nx[1:nMax], rho2ndq, '-ko')
