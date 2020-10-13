@@ -70,6 +70,20 @@ VxAll  = np.array(VxAll)
 VyAll  = np.array(VyAll)
 
 #----------------------------------------------------------
+#-                                                   ------
+#-Read barycenter coordinates for error scatter plots------
+#-                                                   ------
+#----------------------------------------------------------
+with open("barycenters", "r") as f:
+    nps   = int(f.readline())
+    xList = []
+    yList = []
+    for line in f:
+        co = [float(val) for val in line.split()]
+        xList.append(co[0])
+        yList.append(co[1])
+
+#----------------------------------------------------------
 #-                            -----------------------------
 #-Compute infinity & 2nd norms-----------------------------
 #-                            -----------------------------
@@ -95,6 +109,53 @@ for i in range(nMax):
     Vx2ndnorm.append (la.norm(np.absolute(VxAll [i] - VxAll [nMax]), 2))
     VyInfnorm.append (la.norm(np.absolute(VyAll [i] - VyAll [nMax]), np.inf))
     Vy2ndnorm.append (la.norm(np.absolute(VyAll [i] - VyAll [nMax]), 2))
+
+#----------------------------------------------------------
+#-                   --------------------------------------
+#-Error scatter plots--------------------------------------
+#-                   --------------------------------------
+#----------------------------------------------------------
+cm   = plt.cm.get_cmap('RdYlBu')
+pRho = input("Plot Density error scatter? Y or N: ")
+if pRho == "Y" or pRho == "y":
+    eRho = []
+    for i in range(nMax):
+        eRho.append(np.absolute(rhoAll[i] - rhoAll[nMax]))
+        sRho = plt.scatter(xList, yList, c=eRho[i], vmin=0, vmax=max(eRho[0]), cmap=cm)
+        plt.colorbar(sRho)
+        plt.title("Density Error at Grid Level "+str(i))
+        plt.figure()
+    plt.show()
+pP   = input("Plot Pressure error scatter? Y or N: ")
+if pP == "Y" or pP == "y":
+    eP   = []
+    for i in range(nMax):
+        eP.append(np.absolute(pAll[i] - pAll[nMax]))
+        sP = plt.scatter(xList, yList, c=eP[i], vmin=0, vmax=max(eP[0]), cmap=cm)
+        plt.colorbar(sP)
+        plt.title("Pressure Error at Grid Level "+str(i))
+        plt.figure()
+    plt.show()
+pT   = input("Plot Temperature error scatter? Y or N: ")
+if pT == "Y" or pT == "y":
+    eT   = []
+    for i in range(nMax):
+        eT.append(np.absolute(TAll[i] - TAll[nMax]))
+        sT = plt.scatter(xList, yList, c=eT[i], vmin=0, vmax=max(eT[0]), cmap=cm)
+        plt.colorbar(sT)
+        plt.title("Temperature Error at Grid Level "+str(i))
+        plt.figure()
+    plt.show()
+pVx  = input("Plot x-Velocity error scatter? Y or N: ")
+if pVx == "Y" or pVx == "y":
+    eVx  = []
+    for i in range(nMax):
+        eVx.append(np.absolute(VxAll[i] - VxAll[nMax]))
+        sVx = plt.scatter(xList, yList, c=eVx[i], vmin=0, vmax=max(eVx[0]), cmap=cm)
+        plt.colorbar(sVx)
+        plt.title("x-Velocity Error at Grid Level "+str(i))
+        plt.figure()
+    plt.show()
 
 #----------------------------------------------------------
 #-              -------------------------------------------
