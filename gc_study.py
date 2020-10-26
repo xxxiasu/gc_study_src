@@ -16,6 +16,12 @@ def getIntFromFilename(filename):
     """
     return int(re.search(r'\d+', filename).group(0))
 
+def fmt(floatVar):
+    """ Return the formatted float variable in scientific notation
+    floatVar : float varibale to format
+    """
+    return "{:.6e}".format(floatVar)
+
 #----------------------------------------------------------
 #-                         --------------------------------
 #-Read barycenter variables--------------------------------
@@ -183,6 +189,31 @@ for i in range(1,nMax):
     Vx2ndq.append (-(np.log(Vx2ndnorm [i]) - np.log(Vx2ndnorm [i-1]))/np.log(ratio))
     VyInfq.append (-(np.log(VyInfnorm [i]) - np.log(VyInfnorm [i-1]))/np.log(ratio))
     Vy2ndq.append (-(np.log(Vy2ndnorm [i]) - np.log(Vy2ndnorm [i-1]))/np.log(ratio))
+
+#----------------------------------------------------------
+#-                    -------------------------------------
+#-Output to .dat files-------------------------------------
+#-                    -------------------------------------
+#----------------------------------------------------------
+with open("gc_2ndE.dat", "w") as f:
+    for i in range(nMax):
+        f.writelines([str(Nx[i])           , " ", str(fmt(rho2ndnorm[i])), " ", str(fmt(p2ndnorm[i])) , " ", \
+                      str(fmt(T2ndnorm[i])), " ", str(fmt(Vx2ndnorm[i])) , " ", str(fmt(Vy2ndnorm[i])), "\n"])
+
+with open("gc_InfE.dat", "w") as f:
+    for i in range(nMax):
+        f.writelines([str(Nx[i])           , " ", str(fmt(rhoInfnorm[i])), " ", str(fmt(pInfnorm[i])) , " ", \
+                      str(fmt(TInfnorm[i])), " ", str(fmt(VxInfnorm[i])) , " ", str(fmt(VyInfnorm[i])), "\n"])
+
+with open("gc_2ndq.dat", "w") as f:
+    for i in range(nMax-1):
+        f.writelines([str(Nx[i+1])      , " ", str(fmt(rho2ndq[i])), " ", str(fmt(p2ndq[i])) , " ", \
+                      str(fmt(T2ndq[i])), " ", str(fmt(Vx2ndq[i])) , " ", str(fmt(Vy2ndq[i])), "\n"])
+
+with open("gc_Infq.dat", "w") as f:
+    for i in range(nMax-1):
+        f.writelines([str(Nx[i+1])      , " ", str(fmt(rhoInfq[i])), " ", str(fmt(pInfq[i])) , " ", \
+                      str(fmt(TInfq[i])), " ", str(fmt(VxInfq[i])) , " ", str(fmt(VyInfq[i])), "\n"])
 
 #----------------------------------------------------------
 #-                   --------------------------------------
